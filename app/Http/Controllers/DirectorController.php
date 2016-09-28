@@ -32,7 +32,7 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        $clients = Client::pluck('name', 'id');
+        $clients = Client::pluck('name', 'client_id');
         return view('director.create', compact('clients'));
     }
 
@@ -67,7 +67,7 @@ class DirectorController extends Controller
      */
     public function edit(Director $client)
     {
-        $clients = Client::pluck('name', 'id');
+        $clients = Client::pluck('name', 'client_id');
         return view('director.edit', compact('director', 'clients'));
     }
 

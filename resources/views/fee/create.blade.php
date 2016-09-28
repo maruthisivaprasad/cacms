@@ -5,35 +5,57 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Contact</div>
+                <div class="panel-heading">Create Fee</div>
                 <div class="panel-body">
-                    {!! Form::open(array('route' => 'contact.store')) !!}
-                    <div class="form-group">
+                    {!! Form::open(array('route' => 'fee.store')) !!}
+                    <div class="row">
                         <div class="col-xs-2">
-                            {!! Form::label('first_name', 'First Name') !!}
+                            {!! Form::label('client_id', 'Client') !!}
                         </div>
                         <div class="col-xs-4">
-                            {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                            {!! Form::select('client_id',$clients, null, ['class' => 'form-control']) !!}
                         </div>
                         <div class="col-xs-2">
-                            {!! Form::label('last_name', 'Last Name') !!}
+                            {!! Form::label('service_name', 'Service Name') !!}
                         </div>
                         <div class="col-xs-4">
-                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                            {!! Form::text('service_name',null,['class'=>'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="row">
                         <div class="col-xs-2">
-                            {!! Form::label('email', 'Email') !!}
+                            {!! Form::label('type', 'Type') !!}
                         </div>
                         <div class="col-xs-4">
-                            {!! Form::text('email',null,['class'=>'form-control']) !!}
+                            {!! Form::text('type',null,['class'=>'form-control']) !!}
                         </div>
                         <div class="col-xs-2">
-                            {!! Form::label('phone', 'Phone') !!}
+                            {!! Form::label('fees', 'Fees') !!}
                         </div>
                         <div class="col-xs-4">
-                            {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                            {!! Form::text('fees',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {!! Form::label('amount_receive', 'Amount Receive') !!}
+                        </div>
+                        <div class="col-xs-4">
+                            {!! Form::text('amount_receive',null,['class'=>'form-control']) !!}
+                        </div>
+                        <div class="col-xs-2">
+                            {!! Form::label('balance', 'Balance') !!}
+                        </div>
+                        <div class="col-xs-4">
+                            {!! Form::text('balance',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {!! Form::label('service_deliver', 'Service Delivered') !!}
+                        </div>
+                        <div class="col-xs-4">
+                            {!! Form::select('service_deliver',array('yes' => 'Yes', 'no' => 'No'), null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="form-group">

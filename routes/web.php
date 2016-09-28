@@ -26,3 +26,5 @@ Route::get('contact/update', 'ContactController@update');
 Route::get('contact/view', 'ContactController@view');*/
 Route::resource('contact','ContactController');
 Route::resource('client','ClientController');
+Route::resource('director','DirectorController');
+Route::resource('fee','FeeController');

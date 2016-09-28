@@ -32,7 +32,7 @@ class FeeController extends Controller
      */
     public function create()
     {
-        $clients = Client::pluck('name', 'id');
+        $clients = Client::pluck('name', 'client_id');
         return view('fee.create', compact('clients'));
     }
 
@@ -67,7 +67,7 @@ class FeeController extends Controller
      */
     public function edit(Fee $fee)
     {
-        $clients = Client::pluck('name', 'id');
+        $clients = Client::pluck('name', 'client_id');
         return view('fee.edit', compact('fee', 'clients'));
     }
 

@@ -154,7 +154,9 @@
 </div>
 <script>
     $(document).ready(function() {
-      $( ".datepicker" ).datepicker();
+      $( ".datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
       var ctype = $("#client_type").val();
         if(ctype=='Business')
         {

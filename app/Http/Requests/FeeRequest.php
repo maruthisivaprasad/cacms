@@ -26,6 +26,8 @@ class FeeRequest extends FormRequest
         return [
             'service_name' => 'required',
             'client_id' => 'required',
+            'type' => 'required',
+            'fees' => 'required',
         ];
     }
 }

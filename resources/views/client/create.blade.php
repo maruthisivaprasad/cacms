@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Create Client</div>
                 <div class="panel-body">
-                    {!! Form::open(array('route' => 'client.store')) !!}
+                    {!! Form::open(array('route' => 'client.store', 'files'=>true)) !!}
                     <div class="row">
                         <div class="col-md-2">
                             {!! Form::label('assigned_user', 'Assigned User') !!}
@@ -92,7 +92,7 @@
                                 {!! Form::label('photo', 'PHOTO') !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Form::text('photo',null,['class'=>'form-control']) !!}
+                                 {!! Form::file('photo') !!}
                             </div>
                         </div>
                     </div>  
@@ -154,7 +154,9 @@
 </div>
 <script>
     $(document).ready(function() {
-      $( ".datepicker" ).datepicker();
+      $( ".datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
       var ctype = $("#client_type").val();
         if(ctype=='Business')
         {

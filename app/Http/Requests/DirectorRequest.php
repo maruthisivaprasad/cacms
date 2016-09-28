@@ -27,6 +27,7 @@ class DirectorRequest extends FormRequest
             'name' => 'required',
             'din' => 'required',
             'client_id' => 'required',
+            'email' => 'required|email',
         ];
     }
 }

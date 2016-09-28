@@ -5,29 +5,29 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Contact</div>
+                <div class="panel-heading">Create Director</div>
                 <div class="panel-body">
-                    {!! Form::open(array('route' => 'contact.store')) !!}
-                    <div class="form-group">
+                    {!! Form::open(array('route' => 'director.store')) !!}
+                    <div class="row">
                         <div class="col-xs-2">
-                            {!! Form::label('first_name', 'First Name') !!}
+                            {!! Form::label('client_id', 'Client') !!}
                         </div>
                         <div class="col-xs-4">
-                            {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                            {!! Form::select('client_id',$clients, null, ['class' => 'form-control']) !!}
                         </div>
                         <div class="col-xs-2">
-                            {!! Form::label('last_name', 'Last Name') !!}
+                            {!! Form::label('name', 'Name') !!}
                         </div>
                         <div class="col-xs-4">
-                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                            {!! Form::text('name',null,['class'=>'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="row">
                         <div class="col-xs-2">
-                            {!! Form::label('email', 'Email') !!}
+                            {!! Form::label('din', 'DIN') !!}
                         </div>
                         <div class="col-xs-4">
-                            {!! Form::text('email',null,['class'=>'form-control']) !!}
+                            {!! Form::text('din',null,['class'=>'form-control']) !!}
                         </div>
                         <div class="col-xs-2">
                             {!! Form::label('phone', 'Phone') !!}
@@ -36,7 +36,29 @@
                             {!! Form::text('phone',null,['class'=>'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {!! Form::label('email', 'Email') !!}
+                        </div>
+                        <div class="col-xs-4">
+                            {!! Form::text('email',null,['class'=>'form-control']) !!}
+                        </div>
+                        <div class="col-xs-2">
+                            {!! Form::label('digital_sig', 'Digital Signature') !!}
+                        </div>
+                        <div class="col-xs-4">
+                            {!! Form::select('digital_sig',array('yes' => 'Yes', 'no' => 'No'), null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div id="digitasignal" class="row" style="display:none">
+                        <div class="col-md-2">
+                            {!! Form::label('expiry_date', 'Expiry Date') !!}
+                        </div>
+                        <div class="col-md-4">
+                            {!! Form::text('expiry_date',null,['class'=>'form-control datepicker']) !!}
+                        </div>
+                    </div>
+                    <div class="row">
                          {!! Form::button('Create',['type'=>'submit', 'class'=>'btn btn-primary']) !!}   
                     </div>
                     {!! Form::close() !!}
@@ -54,4 +76,23 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    $( ".datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+      var ctype = $("#digital_sig").val();
+        if(ctype=='yes')
+            $("#digitasignal").show();
+        else
+            $("#digitasignal").hide();
+    });
+    $("#digital_sig").on("change", function() {
+        var ctype = $("#digital_sig").val();
+        if(ctype=='yes')
+            $("#digitasignal").show();
+        else
+            $("#digitasignal").hide();
+    });
+</script>    
 @endsection

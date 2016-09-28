@@ -8,22 +8,22 @@
             <div class='alert alert-success'>{{ Session::get('message')}}</div>
             @endif
             <div class="panel panel-default">
-                <div class="panel-heading">Contact</div>
+                <div class="panel-heading">Fee</div>
                 <div class="panel-body">
                     <table class="table">
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
+                            <th>Service Name</th>
+                            <th>Type</th>
+                            <th>Fees</th>
                             <th></th>
                         </tr>
-                    @foreach($contacts as $contact)
+                    @foreach($fees as $fee)
                     <tr>
-                        <td>{{ $contact->first_name." ".$contact->last_name }}</td>
-                        <td>{{ $contact->email }}</td>
-                        <td>{{ $contact->phone }}</td>
-                        <td>{!! Form::open(array('route' => ['contact.destroy', $contact->contact_id], 'method'=>'Delete')) !!}
-                                {{ link_to_route('contact.edit', 'Edit', [$contact->contact_id], ['class'=>'btn btn-primary']) }} 
+                        <td>{{ $fee->service_name }}</td>
+                        <td>{{ $fee->type }}</td>
+                        <td>{{ $fee->fees }}</td>
+                        <td>{!! Form::open(array('route' => ['fee.destroy', $fee->fee_id], 'method'=>'Delete')) !!}
+                                {{ link_to_route('fee.edit', 'Edit', [$fee->fee_id], ['class'=>'btn btn-primary']) }} 
                                 | 
                                 {!! Form::button('Delete',['type'=>'submit', 'class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}    
@@ -32,7 +32,7 @@
                     @endforeach
                     </table>
                 </div>
-                {{ link_to_route('contact.create', 'Add Contact', null, ['class'=>'btn btn-primary']) }}
+                {{ link_to_route('fee.create', 'Add Fee', null, ['class'=>'btn btn-primary']) }}
             </div>
         </div>
     </div>

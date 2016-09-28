@@ -44,6 +44,30 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
+        $file = $request->file('photo');
+      
+      //Display File Name
+      echo 'File Name: '.$file->getClientOriginalName();
+      echo '<br>';
+   
+      //Display File Extension
+      echo 'File Extension: '.$file->getClientOriginalExtension();
+      echo '<br>';
+   
+      //Display File Real Path
+      echo 'File Real Path: '.$file->getRealPath();
+      echo '<br>';
+   
+      //Display File Size
+      echo 'File Size: '.$file->getSize();
+      echo '<br>';
+   
+      //Display File Mime Type
+      echo 'File Mime Type: '.$file->getMimeType();
+   exit;
+      //Move Uploaded File
+      $destinationPath = 'uploads';
+      $file->move($destinationPath,$file->getClientOriginalName());
         Client::create($request->all());
         return redirect()->route('client.index')->with('message', 'Client creted successful');
     }
