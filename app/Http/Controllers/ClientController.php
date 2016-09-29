@@ -44,31 +44,16 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        $file = $request->file('photo');
-      
-      //Display File Name
-      echo 'File Name: '.$file->getClientOriginalName();
-      echo '<br>';
-   
-      //Display File Extension
-      echo 'File Extension: '.$file->getClientOriginalExtension();
-      echo '<br>';
-   
-      //Display File Real Path
-      echo 'File Real Path: '.$file->getRealPath();
-      echo '<br>';
-   
-      //Display File Size
-      echo 'File Size: '.$file->getSize();
-      echo '<br>';
-   
-      //Display File Mime Type
-      echo 'File Mime Type: '.$file->getMimeType();
-   exit;
-      //Move Uploaded File
-      $destinationPath = 'uploads';
-      $file->move($destinationPath,$file->getClientOriginalName());
         Client::create($request->all());
+        $lastid =  Client::orderBy('client_id', 'desc')->first()->client_id;
+        $file = $request->file('photo');
+        $destinationPath = 'images/clientimage';
+        $ext = $file->getClientOriginalExtension();
+        $filename = $lastid.'.'.$ext;
+        $client = Client::find($lastid);
+        $data['photo'] = $filename;
+        $client->update($data);
+        $file->move($destinationPath,$filename);
         return redirect()->route('client.index')->with('message', 'Client creted successful');
     }
 
@@ -104,7 +89,20 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
+        $file = $request->file('photo');
+        $destinationPath = 'images/clientimage';
+        $ext = $file->getClientOriginalExtension();
+        if($ext!='')
+        {
+            $ap = base_path();
+            $delete = $ap.'/'.$destinationPath.'/'.$client->photo;
+            unlink($delete);
+            $filename = $client->client_id.'.'.$ext;
+            $data['photo'] = $filename;
+            $file->move($destinationPath,$filename);
+        }
         $client->update($request->all());
+        $client->update($data);
         return redirect()->route('client.index')->with('message', 'Client Updated successful');
     }
 

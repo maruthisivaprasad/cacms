@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update Client</div>
                 <div class="panel-body">
-                    {!! Form::model($client, array('route' => ['client.update', $client->client_id], 'method'=>'PUT')) !!}
+                    {!! Form::model($client, array('route' => ['client.update', $client->client_id], 'method'=>'PUT', 'files'=>true)) !!}
                     <div class="row">
                         <div class="col-md-2">
                             {!! Form::label('assigned_user', 'Assigned User') !!}
@@ -92,7 +92,13 @@
                                 {!! Form::label('photo', 'PHOTO') !!}
                             </div>
                             <div class="col-md-4">
-                                {!! Form::text('photo',null,['class'=>'form-control']) !!}
+                                {!! Form::file('photo') !!}
+                                <div id="defaultimage">
+                                    @if($client->photo!='' || $client->photo!='NULL')
+		                    <img height="45" width="145" class="image saved-sign" alt="no sign"
+		                    src="{{ URL::to('images/clientimage/'.$client->photo) }}" />
+		                    @endif
+		                </div>
                             </div>
                         </div>
                     </div>  
@@ -135,7 +141,7 @@
                         </div>
                     </div>
                     <div class="row">
-                         {!! Form::button('Create',['type'=>'submit', 'class'=>'btn btn-primary']) !!}   
+                         {!! Form::button('Save',['type'=>'submit', 'class'=>'btn btn-primary']) !!}   
                     </div>
                     {!! Form::close() !!}
                 </div>
