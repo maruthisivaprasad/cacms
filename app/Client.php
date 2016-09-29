@@ -10,7 +10,7 @@ class Client extends Model
     protected $primaryKey = 'client_id';
     protected $fillable = [
         'client_type', 'client_status', 'name', 'fname', 'dob', 'address', 'mobile', 'email', 'pan', 'uidai', 
-        'photo', 'office_address', 'office_landline', 'website', 'business_nature', 'company_type', 
+        'photo', 'business_name','office_address', 'office_landline', 'website', 'business_nature', 'company_type', 
         'assigned_user'
     ];
 }

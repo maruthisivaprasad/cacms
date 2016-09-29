@@ -47,10 +47,9 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/contact') }}">Contact</a></li>
-                    <li><a href="{{ url('/client') }}">Client</a></li>
-                    <li><a href="{{ url('/director') }}">Director</a></li>
-                    <li><a href="{{ url('/fee') }}">Fee</a></li>
+                    <li><a href="{{ url('/client') }}">Clients</a></li>
+                    <li><a href="{{ url('/director') }}">Directors</a></li>
+                    <li><a href="{{ url('/fee') }}">Fees</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

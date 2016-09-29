@@ -20,6 +20,11 @@
                     <tr>
                         <td>{{ $client->client_type }}</td>
                         <td>{{ $client->client_status }}</td>
+                        @if($client->client_type=='Business')
+                        <td>{{ $client->business_name }}</td>
+                        @else
+                        <td>{{ $client->name }}</td>
+                        @endif
                         <td>{!! Form::open(array('route' => ['client.destroy', $client->client_id], 'method'=>'Delete')) !!}
                                 {{ link_to_route('client.edit', 'Edit', [$client->client_id], ['class'=>'btn btn-primary']) }} 
                                 | 

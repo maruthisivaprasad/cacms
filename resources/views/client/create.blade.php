@@ -99,33 +99,40 @@
                     <div id="business" style="display:none">
                         <div class="row">
                             <div class="col-md-2">
+                                {!! Form::label('business_name', 'Business Name') !!}
+                            </div>
+                            <div class="col-md-4">
+                                {!! Form::text('business_name',null,['class'=>'form-control']) !!}
+                            </div>
+                            <div class="col-md-2">
                                 {!! Form::label('office_address', 'Office Address') !!}
                             </div>
                             <div class="col-md-4">
                                 {!! Form::text('office_address',null,['class'=>'form-control']) !!}
                             </div>
+                            
+                        </div>
+                        <div class="row">
                             <div class="col-md-2">
                                 {!! Form::label('office_landline', 'Office Landline') !!}
                             </div>
                             <div class="col-md-4">
                                 {!! Form::text('office_landline',null,['class'=>'form-control']) !!}
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-2">
                                 {!! Form::label('website', 'Website') !!}
                             </div>
                             <div class="col-md-4">
                                 {!! Form::text('website',null,['class'=>'form-control']) !!}
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-2">
                                 {!! Form::label('business_nature', 'Nature of Business') !!}
                             </div>
                             <div class="col-md-4">
                                 {!! Form::text('business_nature',null,['class'=>'form-control']) !!}
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-2">
                                 {!! Form::label('company_type', 'Company Name') !!}
                             </div>

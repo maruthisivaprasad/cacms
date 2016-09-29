@@ -47,13 +47,16 @@ class ClientController extends Controller
         Client::create($request->all());
         $lastid =  Client::orderBy('client_id', 'desc')->first()->client_id;
         $file = $request->file('photo');
-        $destinationPath = 'images/clientimage';
-        $ext = $file->getClientOriginalExtension();
-        $filename = $lastid.'.'.$ext;
-        $client = Client::find($lastid);
-        $data['photo'] = $filename;
-        $client->update($data);
-        $file->move($destinationPath,$filename);
+        if($file!='')
+        {
+            $destinationPath = 'images/clientimage';
+            $ext = $file->getClientOriginalExtension();
+            $filename = $lastid.'.'.$ext;
+            $client = Client::find($lastid);
+            $data['photo'] = $filename;
+            $client->update($data);
+            $file->move($destinationPath,$filename);
+        }
         return redirect()->route('client.index')->with('message', 'Client creted successful');
     }
 
@@ -89,20 +92,23 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
-        $file = $request->file('photo');
-        $destinationPath = 'images/clientimage';
-        $ext = $file->getClientOriginalExtension();
-        if($ext!='')
-        {
-            $ap = base_path();
-            $delete = $ap.'/'.$destinationPath.'/'.$client->photo;
-            unlink($delete);
-            $filename = $client->client_id.'.'.$ext;
-            $data['photo'] = $filename;
-            $file->move($destinationPath,$filename);
-        }
         $client->update($request->all());
-        $client->update($data);
+        $file = $request->file('photo');
+        if($file!='')
+        {
+            $destinationPath = 'images/clientimage';
+            $ext = $file->getClientOriginalExtension();
+            if($ext!='')
+            {
+                $ap = base_path();
+                $delete = $ap.'/'.$destinationPath.'/'.$client->photo;
+                unlink($delete);
+                $filename = $client->client_id.'.'.$ext;
+                $data['photo'] = $filename;
+                $file->move($destinationPath,$filename);
+                $client->update($data);
+            }
+        }
         return redirect()->route('client.index')->with('message', 'Client Updated successful');
     }
 
