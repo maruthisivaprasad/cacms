@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ClientRequest;
 
 class ClientController extends Controller
@@ -66,9 +66,12 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
-        //
+       $user = DB::table('users')->where('id', $client->assigned_user)->first();
+       $directors = DB::table('director')->where('client_id', $client->client_id)->get();
+       $fees = DB::table('fees')->where('client_id', $client->client_id)->get();
+       return view('client.view', compact('client', 'user', 'directors', 'fees')); 
     }
 
     /**

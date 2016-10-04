@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Fee;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\FeeRequest;
 
 class FeeController extends Controller
@@ -21,7 +21,13 @@ class FeeController extends Controller
      */
     public function index()
     {
-        $fees = Fee::all();
+        $fees = DB::table('fees')
+                ->join('client', 'client.client_id', '=', 'fees.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'fees.service_name', 'fees.fees', 'fees.amount_receive', 'fees.balance', 'fees.type',
+                        'fees.fee_id')
+                ->get();
+        //$fees = Fee::all();
         return view('fee.index', compact('fees'));
     }
 
@@ -54,9 +60,10 @@ class FeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Fee $fee)
     {
-        //
+        $client = DB::table('client')->where('client_id', $fee->client_id)->first();
+        return view('fee.view', compact('fee', 'client')); 
     }
 
     /**

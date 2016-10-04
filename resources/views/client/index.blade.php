@@ -26,6 +26,8 @@
                         <td>{{ $client->name }}</td>
                         @endif
                         <td>{!! Form::open(array('route' => ['client.destroy', $client->client_id], 'method'=>'Delete')) !!}
+                                {{ link_to_route('client.show', 'View', [$client->client_id], ['class'=>'btn btn-primary']) }} 
+                                |
                                 {{ link_to_route('client.edit', 'Edit', [$client->client_id], ['class'=>'btn btn-primary']) }} 
                                 | 
                                 {!! Form::button('Delete',['type'=>'submit', 'class'=>'btn btn-danger']) !!}

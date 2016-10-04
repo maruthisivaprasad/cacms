@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Director;
 use App\Client;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DirectorRequest;
 
 class DirectorController extends Controller
@@ -21,7 +21,13 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $directors = Director::all();
+        $directors = DB::table('director')
+                ->join('client', 'client.client_id', '=', 'director.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'director.name as dname', 'director.phone as dphone', 'director.email as demail',
+                        'director.din', 'director.director_id')
+                ->get();
+        //$directors = Director::all();
         return view('director.index', compact('directors'));
     }
 
@@ -54,9 +60,10 @@ class DirectorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Director $director)
     {
-        //
+        $client = DB::table('client')->where('client_id', $director->client_id)->first();
+        return view('director.view', compact('director', 'client')); 
     }
 
     /**
@@ -65,7 +72,7 @@ class DirectorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Director $client)
+    public function edit(Director $director)
     {
         $clients = Client::pluck('name', 'client_id');
         return view('director.edit', compact('director', 'clients'));
