@@ -18,7 +18,7 @@
                         </tr>
                     @foreach($clients as $client)
                     <tr>
-                        <td>{{ $client->client_type }}</td>
+                        <td>{{ link_to_route('client.show', $client->client_type, [$client->client_id]) }}</td>
                         <td>{{ $client->client_status }}</td>
                         @if($client->client_type=='Business')
                         <td>{{ $client->business_name }}</td>
@@ -26,10 +26,6 @@
                         <td>{{ $client->name }}</td>
                         @endif
                         <td>{!! Form::open(array('route' => ['client.destroy', $client->client_id], 'method'=>'Delete')) !!}
-                                {{ link_to_route('client.show', 'View', [$client->client_id], ['class'=>'btn btn-primary']) }} 
-                                |
-                                {{ link_to_route('client.edit', 'Edit', [$client->client_id], ['class'=>'btn btn-primary']) }} 
-                                | 
                                 {!! Form::button('Delete',['type'=>'submit', 'class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}    
                         </td>

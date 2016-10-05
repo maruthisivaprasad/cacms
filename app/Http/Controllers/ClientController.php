@@ -69,8 +69,18 @@ class ClientController extends Controller
     public function show(Client $client)
     {
        $user = DB::table('users')->where('id', $client->assigned_user)->first();
-       $directors = DB::table('director')->where('client_id', $client->client_id)->get();
-       $fees = DB::table('fees')->where('client_id', $client->client_id)->get();
+       $directors = DB::table('director')
+                ->join('client', 'client.client_id', '=', 'director.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'director.name as dname', 'director.phone as dphone', 'director.email as demail',
+                        'director.din', 'director.director_id')
+                ->get();
+       $fees = DB::table('fees')
+                ->join('client', 'client.client_id', '=', 'fees.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'fees.service_name', 'fees.fees', 'fees.amount_receive', 'fees.balance', 'fees.type',
+                        'fees.fee_id')
+                ->get();
        return view('client.view', compact('client', 'user', 'directors', 'fees')); 
     }
 
