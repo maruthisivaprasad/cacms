@@ -1,39 +1,40 @@
 @extends('layouts.app')
-
+@section('page_heading','Tables')
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <fieldset class="fieldset">
-                <legend class="legend">Director Information</legend>
-                <table class="detail-view">
-                    <tr class="even">
-                        <th>Client Name</th>
+        @section ('ctable_panel_title','Director Information')
+        @section ('ctable_panel_body')    
+            <table class="table table-condensed">
+                <tbody>
+                    <tr>
+                        <td>Client Name</td>
                         <td><?php if($client->client_type=='Business') { echo $client->business_name; } else { echo $client->name; }  ?></td>
                     </tr>
-                    <tr class="odd">
-                        <th>Name</th>
+                    <tr>
+                        <td>Name</td>
                         <td><?php echo $director->name; ?></td>
                     </tr>
-                    <tr class="even">
-                        <th>DIN</th>
+                    <tr>
+                        <td>DIN</td>
                         <td><?php echo $director->din; ?></td>
                     </tr>
-                    <tr class="odd">
-                        <th>Phone</th>
+                    <tr>
+                        <td>Phone</td>
                         <td><?php echo $director->phone; ?></td>
                     </tr>
-                    <tr class="even">
-                        <th>Email</th>
+                    <tr>
+                        <td>Email</td>
                         <td><?php echo $director->email; ?></td>
                     </tr>
-                    <tr class="odd">
-                        <th>Digital Signature</th>
+                    <tr>
+                        <td>Digital Signature</td>
                         <td><?php echo $director->digital_sig; ?></td>
                     </tr>
-                </table>
-            </fieldset>
-        </div>
+                </tbody>
+            </table>
+        @endsection
+        @include('widgets.panel', array('header'=>true, 'as'=>'ctable'))
     </div>
 </div>
 @endsection

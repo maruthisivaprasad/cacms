@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('page_heading','Tables')
 @section('content')
 <script>
 	 $(function() {
@@ -58,19 +58,24 @@
             </div>
             <div class="row">
                 <div class="col-md-2">Email</div>
-                <div class="col-md-4"><?php echo $client->email; ?></div>
+                <div class="col-md-10"><?php echo $client->email; ?></div>
             </div>
             <div class="row">
                 <div class="col-md-2">PAN</div>
-                <div class="col-md-4"><?php echo $client->pan; ?></div>
+                <div class="col-md-10"><?php echo $client->pan; ?></div>
             </div>
             <div class="row">
                 <div class="col-md-2">UIDAI</div>
-                <div class="col-md-4"><?php echo $client->uidai; ?></div>
+                <div class="col-md-10"><?php echo $client->uidai; ?></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                {{ link_to_route('client.edit', 'Edit', [$client->client_id], ['class'=>'btn btn-primary']) }} 
+                </div>
             </div>
         </div>    
         <div id="tabs-2">
-            <table class="table">
+            <table class="table table-condensed">
                 <tr>
                     <th>Client Name</th>
                     <th>Name</th>
@@ -103,7 +108,7 @@
             </table>
         </div>
         <div id="tabs-3">
-            <table class="table">
+            <table class="table table-condensed">
                 <tr>
                     <th>Client Name</th>
                     <th>Service Name</th>
@@ -133,7 +138,6 @@
                 @endforeach
             </table>
         </div>
-        {{ link_to_route('client.edit', 'Edit', [$client->client_id], ['class'=>'btn btn-primary']) }} 
     </div>
 </div>
 @endsection

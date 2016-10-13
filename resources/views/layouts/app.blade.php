@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    
+    <link rel="stylesheet" href="{{ asset("public/assets/stylesheets/styles.css") }}" />
     <!-- Scripts -->
     <script src="{{ asset('public/js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -46,12 +46,17 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                @if (Auth::guest())
+                @else
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/client') }}">Clients</a></li>
                     <li><a href="{{ url('/director') }}">Directors</a></li>
                     <li><a href="{{ url('/fee') }}">Fees</a></li>
+                    <li><a href="{{ url('/logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">Logout</a></li>
                 </ul>
-
+                @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -61,7 +66,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->name }}
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
