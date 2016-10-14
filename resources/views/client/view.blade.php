@@ -12,6 +12,7 @@
             <li><a href="#tabs-1">Client Information</a></li>
             <li><a href="#tabs-2">Directors</a></li>
             <li><a href="#tabs-3">Fees</a></li>
+            <li><a href="#tabs-4">Documents</a></li>
         </ul>
         <div id="tabs-1">
             <div class="row">
@@ -106,6 +107,7 @@
                 </tr>
                 @endforeach
             </table>
+            {{ link_to_route('director.create', 'Add Director', null, ['class'=>'btn btn-primary']) }}
         </div>
         <div id="tabs-3">
             <table class="table table-condensed">
@@ -136,6 +138,28 @@
                     </td>
                 </tr>
                 @endforeach
+            </table>
+            {{ link_to_route('fee.create', 'Add Fee', null, ['class'=>'btn btn-primary']) }}
+        </div>
+        <div id="tabs-4">
+            <table class="table">
+                <tr>
+                    <th>Client Name</th>
+                    <th>Title</th>
+                    <th>Path</th>
+                    <th></th>
+                </tr>
+            @foreach($documents as $document)
+            <tr>
+                <td>{{ $document->cname }}</td>
+                <td>{{ $document->title }}</td>
+                <td><a href="images/{{ $document->client_id }}/{{$document->path}}">{{$document->path}}</a></td>
+                <td>{!! Form::open(array('route' => ['document.destroy', $document->document_id], 'method'=>'Delete')) !!}
+                        {!! Form::button('Delete',['type'=>'submit', 'class'=>'btn btn-danger']) !!}
+                    {!! Form::close() !!}    
+                </td>
+            </tr>
+            @endforeach
             </table>
         </div>
     </div>

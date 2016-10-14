@@ -74,14 +74,23 @@ class ClientController extends Controller
                 ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
                         'director.name as dname', 'director.phone as dphone', 'director.email as demail',
                         'director.din', 'director.director_id')
+               ->where('director.client_id', '=', $client->client_id)
                 ->get();
        $fees = DB::table('fees')
                 ->join('client', 'client.client_id', '=', 'fees.client_id')
                 ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
                         'fees.service_name', 'fees.fees', 'fees.amount_receive', 'fees.balance', 'fees.type',
                         'fees.fee_id')
+               ->where('fees.client_id', '=', $client->client_id)
                 ->get();
-       return view('client.view', compact('client', 'user', 'directors', 'fees')); 
+       $documents = DB::table('documents')
+                ->join('client', 'client.client_id', '=', 'documents.client_id')
+                ->select('client.name as cname', 'documents.title as title', 'documents.path as path', 
+                        'documents.document_id', 'client.client_id')
+                ->where('documents.is_active', '=', 1)
+               ->where('documents.client_id', '=', $client->client_id)
+                ->get();
+       return view('client.view', compact('client', 'user', 'directors', 'fees', 'documents')); 
     }
 
     /**

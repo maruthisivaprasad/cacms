@@ -52,6 +52,7 @@
                     <li><a href="{{ url('/client') }}">Clients</a></li>
                     <li><a href="{{ url('/director') }}">Directors</a></li>
                     <li><a href="{{ url('/fee') }}">Fees</a></li>
+                    <li><a href="{{ url('/document') }}">Documents</a></li>
                     <li><a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">Logout</a></li>

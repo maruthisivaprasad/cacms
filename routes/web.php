@@ -28,3 +28,4 @@ Route::resource('contact','ContactController');
 Route::resource('client','ClientController');
 Route::resource('director','DirectorController');
 Route::resource('fee','FeeController');
+Route::resource('document','DocumentController');
