@@ -97,7 +97,7 @@ class FeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fee $client)
+    public function destroy(Fee $fee)
     {
         $fee->delete();
         return redirect()->route('fee.index')->with('message', 'Fee Deleted successful');

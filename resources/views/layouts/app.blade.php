@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{URL::asset('/images/ca.png')}}" alt="profile Pic" height="35" width="70">
                 </a>
             </div>
 
