@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                     {!! Form::button('Create',['type'=>'submit', 'class'=>'btn btn-primary']) !!}  
+                     {!! Form::button('Save',['type'=>'submit', 'class'=>'btn btn-primary']) !!}  
                     </div> 
                 </div>
                 {!! Form::close() !!}

@@ -61,7 +61,11 @@
                 </tr>
             @foreach($documents as $document)
             <tr>
+                @if($document->ctype=='Business')
+                <td>{{ $document->bname }}</td>
+                @else
                 <td>{{ $document->cname }}</td>
+                @endif
                 <td>{{ $document->title }}</td>
                 <td><a href="images/{{ $document->client_id }}/{{$document->path}}">{{$document->path}}</a></td>
                 <td>{!! Form::open(array('route' => ['document.destroy', $document->document_id], 'method'=>'Delete')) !!}

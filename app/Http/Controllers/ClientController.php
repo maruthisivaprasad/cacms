@@ -85,7 +85,7 @@ class ClientController extends Controller
                 ->get();
        $documents = DB::table('documents')
                 ->join('client', 'client.client_id', '=', 'documents.client_id')
-                ->select('client.name as cname', 'documents.title as title', 'documents.path as path', 
+                ->select('client.name as cname', 'client.client_type as ctype','client.business_name as bname', 'documents.title as title', 'documents.path as path', 
                         'documents.document_id', 'client.client_id')
                 ->where('documents.is_active', '=', 1)
                ->where('documents.client_id', '=', $client->client_id)

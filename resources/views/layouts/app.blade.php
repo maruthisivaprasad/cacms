@@ -39,8 +39,8 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{URL::asset('/images/ca.png')}}" alt="profile Pic" height="35" width="70">
+                <a class="navbar-brand" href="{{ url('/home') }}">
+		<img src="{{URL::asset('/images/ca.png')}}" alt="profile Pic" height="32" width="70">
                 </a>
             </div>
 
@@ -53,9 +53,7 @@
                     <li><a href="{{ url('/director') }}">Directors</a></li>
                     <li><a href="{{ url('/fee') }}">Fees</a></li>
                     <li><a href="{{ url('/document') }}">Documents</a></li>
-                    <li><a href="{{ url('/logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">Logout</a></li>
+                    
                 </ul>
                 @endif
                 <!-- Right Side Of Navbar -->
@@ -84,6 +82,9 @@
                                 </li>
                             </ul>
                         </li>
+                        <li><a href="{{ url('/logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">Logout</a></li>
                     @endif
                 </ul>
             </div>

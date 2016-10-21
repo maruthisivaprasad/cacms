@@ -29,6 +29,20 @@
                         {!! Form::select('client_status',array('Lead' => 'Lead', 'Prospect' => 'Prospect', 'Client' => 'Client'), null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        {!! Form::label('mobile', 'Primary Phone') !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Form::text('mobile',null,['class'=>'form-control']) !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! Form::label('email', 'Primary Email') !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Form::text('email',null,['class'=>'form-control']) !!}
+                    </div>
+                </div>
                 <div id="personal">
                     <div class="form-group">
                         <div class="col-md-2">
@@ -58,20 +72,7 @@
                             {!! Form::text('address',null,['class'=>'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            {!! Form::label('mobile', 'Mobile') !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Form::text('mobile',null,['class'=>'form-control']) !!}
-                        </div>
-                        <div class="col-md-2">
-                            {!! Form::label('email', 'Email') !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Form::text('email',null,['class'=>'form-control']) !!}
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <div class="col-md-2">
                             {!! Form::label('pan', 'PAN') !!}

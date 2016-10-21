@@ -8,7 +8,8 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    ”We are what we repeatedly do. Excellence is not an act, but a habit.”  ~ Aristotle
+                    <img src="{{URL::asset('/images/banner.png')}}" alt="profile Pic" height="350" width="700">
                 </div>
             </div>
         </div>
