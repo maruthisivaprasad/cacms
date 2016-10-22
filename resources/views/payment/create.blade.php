@@ -3,6 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if(Session::has('message'))
+            <div class='alert alert-success'>{{ Session::get('message')}}</div>
+        @endif
         <div class="panel panel-default">
             <div class="panel-heading">Create Payment</div>
             <div class="panel-body">
@@ -40,7 +43,7 @@
                         {!! Form::label('payment_amount', 'Amount Payable') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('payment_amount',null,['class'=>'form-control']) !!}
+                        {!! Form::text('payment_amount',$payable,['class'=>'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group">

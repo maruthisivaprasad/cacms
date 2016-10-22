@@ -48,13 +48,13 @@
                         {!! Form::label('amount_receive', 'Amount Receive') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('amount_receive',null,['class'=>'form-control']) !!}
+                        {!! Form::text('amount_receive',null,['class'=>'form-control', 'readonly' => 'true']) !!}
                     </div>
                     <div class="col-xs-2">
                         {!! Form::label('balance', 'Balance') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('balance',null,['class'=>'form-control']) !!}
+                        {!! Form::text('balance',null,['class'=>'form-control', 'readonly' => 'true']) !!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -84,4 +84,18 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    fee = $( "#fees" ).val();
+    amount_receive = $( "#amount_receive" ).val();
+    balance = fee - amount_receive;
+    $('#balance').val(balance);
+});   
+$( "#fees" ).blur(function() {
+    fee = $( "#fees" ).val();
+    amount_receive = $( "#amount_receive" ).val();
+    balance = fee - amount_receive;
+    $('#balance').val(balance);
+});
+</script>
 @endsection

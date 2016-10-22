@@ -20,15 +20,15 @@
                 </tr>
                 <tr>
                     <td>Fees</td>
-                    <td><?php echo $fee->fees; ?></td>
+                    <td>Rs. <?php echo number_format($fee->fees,2); ?></td>
                 </tr>
                 <tr>
                     <td>Amount Receive</td>
-                    <td><?php echo $fee->amount_receive; ?></td>
+                    <td>Rs. <?php echo number_format($fee->amount_receive,2); ?></td>
                 </tr>
                 <tr>
                     <td>Balance</td>
-                    <td><?php echo $fee->balance; ?></td>
+                    <td>Rs. <?php echo number_format($fee->balance,2); ?></td>
                 </tr>
                 <tr>
                     <td>Service Deliver</td>
@@ -57,16 +57,12 @@
             @foreach($payments as $payment)
             <tr>
                 <td>{{ $payment->service_name }}</td>
-                <td>{{ $payment->payment_amount }}</td>
-                <td>{{ $payment->paid_amount }}</td>
+                <td>Rs. {{ number_format($payment->payment_amount,2) }}</td>
+                <td>Rs. {{ number_format($payment->paid_amount,2) }}</td>
                 <td>{{ $payment->payment_mode }}</td>
                 <td>{{ $payment->paymentdate }}</td>
                 <td>{!! Form::open(array('route' => ['payment.destroy', $payment->payment_id], 'method'=>'Delete')) !!}
                         {{ link_to_route('payment.show', 'View', [$payment->payment_id], ['class'=>'btn btn-primary']) }} 
-                        |
-                        {{ link_to_route('payment.edit', 'Edit', [$payment->payment_id], ['class'=>'btn btn-primary']) }} 
-                        | 
-                        {!! Form::button('Delete',['type'=>'submit', 'class'=>'btn btn-danger']) !!}
                     {!! Form::close() !!}    
                 </td>
             </tr>

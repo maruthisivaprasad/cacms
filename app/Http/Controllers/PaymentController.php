@@ -40,17 +40,22 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $id = '';
+        $id = $payable = '';
         if(isset($_GET))
         {
             foreach($_GET as $key=>$value)
                 $id = $key;
+            $fee = DB::table('fees')->where('fee_id', $id)->first();
+            if(!empty($fee))
+                $payable = $fee->fees;
+            else
+                $payable = '';
         }
         $payments = DB::table('client')
                 ->join('fees', 'fees.client_id', '=', 'client.client_id')
                 ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'fees.fee_id')
                 ->get();
-        return view('payment.create', compact('payments', 'id'));
+        return view('payment.create', compact('payments', 'id', 'payable'));
     }
 
     /**
@@ -61,6 +66,15 @@ class PaymentController extends Controller
      */
     public function store(PaymentRequest $request)
     {
+        if(isset($_POST))
+        {
+            $fee = DB::table('fees')->where('fee_id', $_POST['fee_id'])->first();
+            if($fee->balance < $_POST['paid_amount'])
+                return redirect()->route('payment.create')->with('message', 'Payment amount was greater than the balance');
+            $amountreceived = $fee->amount_receive + $_POST['paid_amount'];
+            $balance = $fee->fees - $amountreceived;
+            DB::table('fees')->where('fee_id', $_POST['fee_id'])->update(['amount_receive' => $amountreceived, 'balance'=>$balance]);
+        }
         Payment::create($request->all());
         return redirect()->route('payment.index')->with('message', 'Payment creted successful');
     }
