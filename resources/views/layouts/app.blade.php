@@ -53,7 +53,7 @@
                     <li><a href="{{ url('/director') }}">Directors</a></li>
                     <li><a href="{{ url('/fee') }}">Fees</a></li>
                     <li><a href="{{ url('/document') }}">Documents</a></li>
-                    
+                    <li><a href="{{ url('/payment') }}">Payments</a></li>
                 </ul>
                 @endif
                 <!-- Right Side Of Navbar -->
