@@ -38,7 +38,9 @@ class FeeController extends Controller
      */
     public function create()
     {
-        $clients = Client::pluck('name', 'client_id');
+        $clients = DB::table('client')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'client.client_id')
+                ->get();
         return view('fee.create', compact('clients'));
     }
 
@@ -62,8 +64,16 @@ class FeeController extends Controller
      */
     public function show(Fee $fee)
     {
+        $payments = DB::table('payment')
+                ->join('fees', 'fees.fee_id', '=', 'payment.fee_id')
+                ->join('client', 'client.client_id', '=', 'fees.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'fees.fees as fees', 'fees.balance as balance', 'payment.service_name','fees.fee_id',
+                        'payment.payment_amount', 'payment.payment_id', 'payment.paid_amount',
+                        'payment.payment_mode', 'payment.check_no', 'payment.paymentdate', 'payment.remarks')
+                ->where('payment.fee_id', $fee->fee_id)->get();
         $client = DB::table('client')->where('client_id', $fee->client_id)->first();
-        return view('fee.view', compact('fee', 'client')); 
+        return view('fee.view', compact('fee', 'client', 'payments')); 
     }
 
     /**
@@ -74,7 +84,9 @@ class FeeController extends Controller
      */
     public function edit(Fee $fee)
     {
-        $clients = Client::pluck('name', 'client_id');
+        $clients = DB::table('client')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'client.client_id')
+                ->get();
         return view('fee.edit', compact('fee', 'clients'));
     }
 

@@ -38,7 +38,9 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        $clients = Client::pluck('name', 'client_id');
+        $clients = DB::table('client')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'client.client_id')
+                ->get();
         return view('director.create', compact('clients'));
     }
 
@@ -74,7 +76,9 @@ class DirectorController extends Controller
      */
     public function edit(Director $director)
     {
-        $clients = Client::pluck('name', 'client_id');
+        $clients = DB::table('client')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'client.client_id')
+                ->get();
         return view('director.edit', compact('director', 'clients'));
     }
 

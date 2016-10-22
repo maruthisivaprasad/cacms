@@ -3,33 +3,45 @@
 @section('content')
 <div class="container">
     <div class="row">
-        @section ('ctable_panel_title','Director Information')
+        @section ('ctable_panel_title','Payment Information')
         @section ('ctable_panel_body')    
             <table class="table table-condensed">
                 <tbody>
                     <tr>
                         <td>Client Name</td>
-                        <td><?php if($client->client_type=='Business') { echo $client->business_name; } else { echo $client->name; }  ?></td>
+                        <td><?php if($payment->ctype=='Business') { echo $payment->bname; } else { echo $payment->cname; }  ?></td>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td><?php echo $director->name; ?></td>
+                        <td>Fee ID</td>
+                        <td><?php if($payment->ctype=='Business') { echo $payment->bname."".$payment->fee_id; } else { echo $payment->cname."".$payment->fee_id; }  ?></td>
                     </tr>
                     <tr>
-                        <td>DIN</td>
-                        <td><?php echo $director->din; ?></td>
+                        <td>Date</td>
+                        <td><?php echo $payment->paymentdate; ?></td>
                     </tr>
                     <tr>
-                        <td>Phone</td>
-                        <td><?php echo $director->phone; ?></td>
+                        <td>Service Name</td>
+                        <td><?php echo $payment->service_name; ?></td>
                     </tr>
                     <tr>
-                        <td>Email</td>
-                        <td><?php echo $director->email; ?></td>
+                        <td>Amount Payable</td>
+                        <td><?php echo $payment->payment_amount; ?></td>
                     </tr>
                     <tr>
-                        <td>Digital Signature</td>
-                        <td><?php echo $director->digital_sig; ?></td>
+                        <td>Amount Paid</td>
+                        <td><?php echo $payment->paid_amount; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Payment Mode</td>
+                        <td><?php echo $payment->payment_mode; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Enter No.</td>
+                        <td><?php echo $payment->check_no; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Remarks</td>
+                        <td><?php echo $payment->remarks; ?></td>
                     </tr>
                 </tbody>
             </table>

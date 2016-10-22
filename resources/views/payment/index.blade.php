@@ -22,10 +22,11 @@
             <tr>
                 @if($payment->ctype=='Business')
                 <td>{{ $payment->bname }}</td>
+                <td>{{ $payment->bname }}{{ $payment->fee_id }}</td>
                 @else
                 <td>{{ $payment->cname }}</td>
+                <td>{{ $payment->cname }}{{ $payment->fee_id }}</td>
                 @endif
-                <td>{{ $payment->fee_id }}</td>
                 <td>{{ $payment->service_name }}</td>
                 <td>{{ $payment->payment_amount }}</td>
                 <td>{{ $payment->paid_amount }}</td>

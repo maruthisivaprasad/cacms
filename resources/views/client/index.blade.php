@@ -11,8 +11,8 @@
             <table class="table">
                 <tr>
                     <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <th>Primary Phone</th>
+                    <th>Primary Email</th>
                     <th>Client Type</th>
                     <th>Client Status</th>
                     <th></th>

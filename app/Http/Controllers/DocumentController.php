@@ -22,7 +22,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $clients = Client::pluck('name', 'client_id');
+        $clients = DB::table('client')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'client.client_id')
+                ->get();
         $documents = DB::table('documents')
                 ->join('client', 'client.client_id', '=', 'documents.client_id')
                 ->select('client.name as cname', 'client.client_type as ctype','client.business_name as bname', 'documents.title as title', 'documents.path as path', 

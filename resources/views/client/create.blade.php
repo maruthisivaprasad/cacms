@@ -134,10 +134,18 @@
                             {!! Form::text('business_nature',null,['class'=>'form-control']) !!}
                         </div>
                         <div class="col-md-2">
-                            {!! Form::label('company_type', 'Company Name') !!}
+                            {!! Form::label('company_type', 'Company Type') !!}
                         </div>
                         <div class="col-md-4">
-                            {!! Form::text('company_type',null,['class'=>'form-control']) !!}
+                            <select name="company_type" id="company_type" class="form-control">
+                                <option value="Sole Proprietorship">Sole Proprietorship</option>
+                                <option value="Partnership Firm">Partnership Firm</option>
+                                <option value="LLP">LLP</option>
+                                <option value="Private Ltd">Private Ltd</option>
+                                <option value="Public Limited">Public Limited</option>
+                                <option value="AOP or BOI">AOP or BOI</option>
+                                <option value="Trust">Trust</option>
+                            </select>
                         </div>
                     </div>
                 </div>

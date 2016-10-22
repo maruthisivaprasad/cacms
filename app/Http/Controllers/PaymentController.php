@@ -40,11 +40,17 @@ class PaymentController extends Controller
      */
     public function create()
     {
+        $id = '';
+        if(isset($_GET))
+        {
+            foreach($_GET as $key=>$value)
+                $id = $key;
+        }
         $payments = DB::table('client')
                 ->join('fees', 'fees.client_id', '=', 'client.client_id')
                 ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'fees.fee_id')
                 ->get();
-        return view('payment.create', compact('payments'));
+        return view('payment.create', compact('payments', 'id'));
     }
 
     /**
@@ -67,8 +73,16 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        $client = DB::table('client')->where('client_id', $payment->client_id)->first();
-        return view('payment.view', compact('$payment', 'client')); 
+        $payment = DB::table('payment')
+                ->join('fees', 'fees.fee_id', '=', 'payment.fee_id')
+                ->join('client', 'client.client_id', '=', 'fees.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'fees.fees as fees', 'fees.balance as balance', 'payment.service_name','fees.fee_id',
+                        'payment.payment_amount', 'payment.payment_id', 'payment.paid_amount',
+                        'payment.payment_mode', 'payment.check_no', 'payment.paymentdate', 'payment.remarks')
+                ->where('payment_id', $payment->payment_id)->first();
+        //echo "<pre>";print_r($payments);exit;
+        return view('payment.view', compact('payment')); 
     }
 
     /**
@@ -79,8 +93,11 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        $clients = Client::pluck('name', 'client_id');
-        return view('payment.edit', compact('payment', 'clients'));
+        $payinfo = DB::table('client')
+                ->join('fees', 'fees.client_id', '=', 'client.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'fees.fee_id')
+                ->get();
+        return view('payment.edit', compact('payment', 'payinfo'));
     }
 
     /**

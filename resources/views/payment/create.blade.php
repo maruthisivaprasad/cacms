@@ -15,9 +15,9 @@
                         <select name="fee_id" id="fee_id" class="form-control">
                             @foreach($payments as $payment)
                                 @if($payment->ctype=='Business')
-                                <option value="{{$payment->fee_id}}">{{$payment->bname."".$payment->fee_id}}</option>
+                                <option value="{{$payment->fee_id}}" <?php if($payment->fee_id==$id) {?>selected<?php }?>>{{$payment->bname."".$payment->fee_id}}</option>
                                 @else
-                                <option value="{{$payment->fee_id}}">{{$payment->cname."".$payment->fee_id}}</option>
+                                <option value="{{$payment->fee_id}}" <?php if($payment->fee_id==$id) {?>selected<?php }?>>{{$payment->cname."".$payment->fee_id}}</option>
                                 @endif
                             @endforeach
                         </select>

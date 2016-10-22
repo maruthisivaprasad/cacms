@@ -4,57 +4,77 @@
 <div class="container">
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Update Director</div>
+            <div class="panel-heading">Update Payment</div>
             <div class="panel-body">
-                {!! Form::model($director, array('route' => ['director.update', $director->director_id], 'method'=>'PUT')) !!}
+                {!! Form::model($payment, array('route' => ['payment.update', $payment->payment_id], 'method'=>'PUT')) !!}
                 <div class="form-group">
                     <div class="col-xs-2">
-                        {!! Form::label('client_id', 'Client') !!}
+                        {!! Form::label('fee_id', 'Fee ID') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::select('client_id',$clients, null, ['class' => 'form-control']) !!}
+                        <select name="fee_id" id="fee_id" class="form-control">
+                            @foreach($payinfo as $paydata)
+                                @if($paydata->ctype=='Business')
+                                <option value="{{$paydata->fee_id}}" <?php if($payment->fee_id==$paydata->fee_id) {?>selected<?php }?>>{{$paydata->bname."".$paydata->fee_id}}</option>
+                                @else
+                                <option value="{{$paydata->fee_id}}" <?php if($payment->fee_id==$paydata->fee_id) {?>selected<?php }?>>{{$paydata->cname."".$paydata->fee_id}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-xs-2">
-                        {!! Form::label('name', 'Name') !!}
+                        {!! Form::label('paymentdate', 'Date') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('name',null,['class'=>'form-control']) !!}
+                        {!! Form::text('paymentdate',null,['class'=>'form-control datepicker']) !!}
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-2">
-                        {!! Form::label('din', 'DIN') !!}
+                        {!! Form::label('service_name', 'Service Name') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('din',null,['class'=>'form-control']) !!}
+                        {!! Form::text('service_name',null,['class'=>'form-control']) !!}
                     </div>
                     <div class="col-xs-2">
-                        {!! Form::label('phone', 'Phone') !!}
+                        {!! Form::label('payment_amount', 'Amount Payable') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                        {!! Form::text('payment_amount',null,['class'=>'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-2">
-                        {!! Form::label('email', 'Email') !!}
+                        {!! Form::label('paid_amount', 'Amount Paid') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('email',null,['class'=>'form-control']) !!}
+                        {!! Form::text('paid_amount',null,['class'=>'form-control']) !!}
                     </div>
                     <div class="col-xs-2">
-                        {!! Form::label('digital_sig', 'Digital Signature') !!}
+                        {!! Form::label('payment_mode', 'Payment Mode') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::select('digital_sig',array('yes' => 'Yes', 'no' => 'No'), null, ['class' => 'form-control']) !!}
+                        <select name="payment_mode" id="payment_mode" class="form-control">
+                            <option value="Cash" <?php if($payment->payment_mode=='Cash') {?>selected<?php }?>>Cash</option>
+                            <option value="Cheque" <?php if($payment->payment_mode=='Cheque') {?>selected<?php }?>>Cheque</option>
+                            <option value="DD" <?php if($payment->payment_mode=='DD') {?>selected<?php }?>>DD</option>
+                        </select>
                     </div>
                 </div>
-                <div id="digitasignal" class="form-group" style="display:none">
-                    <div class="col-md-2">
-                        {!! Form::label('expiry_date', 'Expiry Date') !!}
+                <div id="paymentdisplay" class="form-group" style="display: none">
+                    <div class="col-xs-2">
+                        {!! Form::label('check_no', 'Enter No.') !!}
                     </div>
-                    <div class="col-md-4">
-                        {!! Form::text('expiry_date',null,['class'=>'form-control datepicker']) !!}
+                    <div class="col-xs-4">
+                        {!! Form::text('check_no',null,['class'=>'form-control']) !!}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        {!! Form::label('remarks', 'Remarks') !!}
+                    </div>
+                    <div class="col-xs-4">
+                        {!! Form::textArea('remarks',null,['class'=>'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -81,18 +101,26 @@ $(document).ready(function() {
       $( ".datepicker" ).datepicker({
         dateFormat: "yy-mm-dd"
     });
-      var ctype = $("#digital_sig").val();
-        if(ctype=='yes')
-            $("#digitasignal").show();
-        else
-            $("#digitasignal").hide();
-    });
-    $("#digital_sig").on("change", function() {
-        var ctype = $("#digital_sig").val();
-        if(ctype=='yes')
-            $("#digitasignal").show();
-        else
-            $("#digitasignal").hide();
-    });
+    payment = $("#payment_mode").val();
+    if(payment!='Cash')
+    {
+        $("#paymentdisplay").show();
+    }
+    else
+    {
+        $("#paymentdisplay").hide();
+    }
+});    
+$( "#payment_mode" ).change(function() {
+    payment = $("#payment_mode").val();
+    if(payment!='Cash')
+    {
+        $("#paymentdisplay").show();
+    }
+    else
+    {
+        $("#paymentdisplay").hide();
+    }
+});
 </script>    
 @endsection

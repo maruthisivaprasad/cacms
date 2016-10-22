@@ -29,6 +29,20 @@
                         {!! Form::select('client_status',array('Lead' => 'Lead', 'Prospect' => 'Prospect', 'Client' => 'Client'), null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        {!! Form::label('mobile', 'Primary Phone') !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Form::text('mobile',null,['class'=>'form-control']) !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! Form::label('email', 'Primary Email') !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Form::text('email',null,['class'=>'form-control']) !!}
+                    </div>
+                </div>
                 <div id="personal">
                     <div class="form-group">
                         <div class="col-md-2">
@@ -56,20 +70,6 @@
                         </div>
                         <div class="col-md-4">
                             {!! Form::text('address',null,['class'=>'form-control']) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            {!! Form::label('mobile', 'Mobile') !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Form::text('mobile',null,['class'=>'form-control']) !!}
-                        </div>
-                        <div class="col-md-2">
-                            {!! Form::label('email', 'Email') !!}
-                        </div>
-                        <div class="col-md-4">
-                            {!! Form::text('email',null,['class'=>'form-control']) !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -139,10 +139,18 @@
                             {!! Form::text('business_nature',null,['class'=>'form-control']) !!}
                         </div>
                         <div class="col-md-2">
-                            {!! Form::label('company_type', 'Company Name') !!}
+                            {!! Form::label('company_type', 'Company Type') !!}
                         </div>
                         <div class="col-md-4">
-                            {!! Form::text('company_type',null,['class'=>'form-control']) !!}
+                            <select name="company_type" id="company_type" class="form-control">
+                                <option value="Sole Proprietorship" <?php if($client->company_type=='Sole Proprietorship') {?>selected<?php }?>>Sole Proprietorship</option>
+                                <option value="Partnership Firm" <?php if($client->company_type=='Partnership Firm') {?>selected<?php }?>>Partnership Firm</option>
+                                <option value="LLP" <?php if($client->company_type=='LLP') {?>selected<?php }?>>LLP</option>
+                                <option value="Private Ltd" <?php if($client->company_type=='Private Ltd') {?>selected<?php }?>>Private Ltd</option>
+                                <option value="Public Limited" <?php if($client->company_type=='Public Limited') {?>selected<?php }?>>Public Limited</option>
+                                <option value="AOP or BOI" <?php if($client->company_type=='AOP or BOI') {?>selected<?php }?>>AOP or BOI</option>
+                                <option value="Trust" <?php if($client->company_type=='Trust') {?>selected<?php }?>>Trust</option>
+                            </select>
                         </div>
                     </div>
                 </div>

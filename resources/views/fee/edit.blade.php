@@ -12,7 +12,15 @@
                         {!! Form::label('client_id', 'Client') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::select('client_id',$clients, null, ['class' => 'form-control']) !!}
+                        <select name="client_id" id="client_id" class="form-control">
+                            @foreach($clients as $client)
+                                @if($client->ctype=='Business')
+                                <option value="{{$client->client_id}}" <?php if($fee->client_id==$client->client_id) {?>selected<?php }?>>{{$client->bname}}</option>
+                                @else
+                                <option value="{{$client->client_id}}" <?php if($fee->client_id==$client->client_id) {?>selected<?php }?>>{{$client->cname}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-xs-2">
                         {!! Form::label('service_name', 'Service Name') !!}

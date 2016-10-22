@@ -12,7 +12,15 @@
                         {!! Form::label('client_id', 'Client') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::select('client_id',$clients, null, ['class' => 'form-control']) !!}
+                        <select name="client_id" id="client_id" class="form-control">
+                            @foreach($clients as $client)
+                                @if($client->ctype=='Business')
+                                <option value="{{$client->client_id}}">{{$client->bname}}</option>
+                                @else
+                                <option value="{{$client->client_id}}">{{$client->cname}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-2">
                         {!! Form::label('title', 'Title') !!}
