@@ -10,7 +10,6 @@
         @section ('table_panel_body')
             <table class="table">
                 <tr>
-                    <th>Client Name</th>
                     <th>Fee ID</th>
                     <th>Service Name</th>
                     <th>Amount Payable</th>
@@ -19,13 +18,20 @@
                     <th></th>
                 </tr>
             @foreach($payments as $payment)
+            <?php
+                $feed = strlen($payment->fee_id);
+                if($feed == 1)
+                    $feeid = ":00".$payment->fee_id;
+                elseif($feed == 2)
+                    $feeid = ":0".$payment->fee_id;
+                else
+                    $feeid = ":".$payment->fee_id;
+            ?>    
             <tr>
                 @if($payment->ctype=='Business')
-                <td>{{ $payment->bname }}</td>
-                <td>{{ $payment->bname }}{{ $payment->fee_id }}</td>
+                <td>{{ $payment->bname }}{{ $feeid }}</td>
                 @else
-                <td>{{ $payment->cname }}</td>
-                <td>{{ $payment->cname }}{{ $payment->fee_id }}</td>
+                <td>{{ $payment->cname }}{{ $feeid }}</td>
                 @endif
                 <td>{{ $payment->service_name }}</td>
                 <td>{{ $payment->payment_amount }}</td>

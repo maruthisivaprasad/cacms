@@ -17,10 +17,18 @@
                     <div class="col-xs-4">
                         <select name="fee_id" id="fee_id" class="form-control">
                             @foreach($payments as $payment)
+                                <?php $feed = strlen($payment->fee_id);
+                                if($feed == 1)
+                                    $feeid = ":00".$payment->fee_id;
+                                elseif($feed == 2)
+                                    $feeid = ":0".$payment->fee_id;
+                                else
+                                    $feeid = ":".$payment->fee_id;
+                                ?>
                                 @if($payment->ctype=='Business')
-                                <option value="{{$payment->fee_id}}" <?php if($payment->fee_id==$id) {?>selected<?php }?>>{{$payment->bname."".$payment->fee_id}}</option>
+                                <option value="{{$payment->fee_id}}" <?php if($payment->fee_id==$id) {?>selected<?php }?>>{{$payment->bname.$feeid}}</option>
                                 @else
-                                <option value="{{$payment->fee_id}}" <?php if($payment->fee_id==$id) {?>selected<?php }?>>{{$payment->cname."".$payment->fee_id}}</option>
+                                <option value="{{$payment->fee_id}}" <?php if($payment->fee_id==$id) {?>selected<?php }?>>{{$payment->cname.$feeid}}</option>
                                 @endif
                             @endforeach
                         </select>

@@ -76,7 +76,7 @@ class PaymentController extends Controller
             DB::table('fees')->where('fee_id', $_POST['fee_id'])->update(['amount_receive' => $amountreceived, 'balance'=>$balance]);
         }
         Payment::create($request->all());
-        return redirect()->route('payment.index')->with('message', 'Payment creted successful');
+        return redirect()->route('fee.show', ['id' => $_POST['fee_id']])->with('message', 'Payment creted successful');
     }
 
     /**
