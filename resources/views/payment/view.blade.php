@@ -34,11 +34,11 @@
                     </tr>
                     <tr>
                         <td>Amount Payable</td>
-                        <td><?php echo $payment->payment_amount; ?></td>
+                        <td>Rs. <?php echo $payment->payment_amount; ?></td>
                     </tr>
                     <tr>
                         <td>Amount Paid</td>
-                        <td><?php echo $payment->paid_amount; ?></td>
+                        <td>Rs. <?php echo $payment->paid_amount; ?></td>
                     </tr>
                     <tr>
                         <td>Payment Mode</td>

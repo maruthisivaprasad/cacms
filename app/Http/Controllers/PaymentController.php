@@ -47,15 +47,23 @@ class PaymentController extends Controller
                 $id = $key;
             $fee = DB::table('fees')->where('fee_id', $id)->first();
             if(!empty($fee))
+            {
                 $payable = $fee->fees;
+                $servicename = $fee->service_name;
+                $balance = $fee->balance;
+            }
             else
+            {
                 $payable = '';
+                $servicename = '';
+                $balance = '';
+            }
         }
         $payments = DB::table('client')
                 ->join('fees', 'fees.client_id', '=', 'client.client_id')
                 ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'fees.fee_id')
                 ->get();
-        return view('payment.create', compact('payments', 'id', 'payable'));
+        return view('payment.create', compact('payments', 'id', 'payable', 'servicename','balance'));
     }
 
     /**

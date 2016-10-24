@@ -45,7 +45,7 @@
                         {!! Form::label('service_name', 'Service Name') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('service_name',null,['class'=>'form-control']) !!}
+                        {!! Form::text('service_name',$servicename,['class'=>'form-control']) !!}
                     </div>
                     <div class="col-xs-2">
                         {!! Form::label('payment_amount', 'Amount Payable') !!}
@@ -59,7 +59,7 @@
                         {!! Form::label('paid_amount', 'Amount Paid') !!}
                     </div>
                     <div class="col-xs-4">
-                        {!! Form::text('paid_amount',null,['class'=>'form-control']) !!}
+                        {!! Form::text('paid_amount',$balance,['class'=>'form-control']) !!}
                     </div>
                     <div class="col-xs-2">
                         {!! Form::label('payment_mode', 'Payment Mode') !!}

@@ -153,7 +153,7 @@
                     @endif
                     <td>{{ $fee->service_name }}</td>
                     <td>{{ $fee->type }}</td>
-                    <td>{{ $fee->fees }}</td>
+                    <td>Rs. {{ $fee->fees }}</td>
                     <td>{!! Form::open(array('route' => ['fee.destroy', $fee->fee_id], 'method'=>'Delete')) !!}
                             {{ link_to_route('fee.show', 'View', [$fee->fee_id], ['class'=>'btn btn-primary']) }} 
                             |

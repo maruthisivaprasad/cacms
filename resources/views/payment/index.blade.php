@@ -34,8 +34,8 @@
                 <td>{{ $payment->cname }}{{ $feeid }}</td>
                 @endif
                 <td>{{ $payment->service_name }}</td>
-                <td>{{ $payment->payment_amount }}</td>
-                <td>{{ $payment->paid_amount }}</td>
+                <td>Rs. {{ $payment->payment_amount }}</td>
+                <td>Rs. {{ $payment->paid_amount }}</td>
                 <td>{{ $payment->payment_mode }}</td>
                 <td>{!! Form::open(array('route' => ['payment.destroy', $payment->payment_id], 'method'=>'Delete')) !!}
                         {{ link_to_route('payment.show', 'View', [$payment->payment_id], ['class'=>'btn btn-primary']) }}                         
