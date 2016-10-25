@@ -10,10 +10,10 @@
         @section ('table_panel_body')
             <table class="table">
                 <tr>
+                    <th>Date</th>
                     <th>Fee ID</th>
                     <th>Service Name</th>
                     <th>Amount Payable</th>
-                    <th>Amount Paid</th>
                     <th>Payment Mode</th>
                     <th></th>
                 </tr>
@@ -28,13 +28,13 @@
                     $feeid = ":".$payment->fee_id;
             ?>    
             <tr>
+                <td>{{ $payment->paymentdate }}</td>
                 @if($payment->ctype=='Business')
                 <td>{{ $payment->bname }}{{ $feeid }}</td>
                 @else
                 <td>{{ $payment->cname }}{{ $feeid }}</td>
                 @endif
                 <td>{{ $payment->service_name }}</td>
-                <td>Rs. {{ $payment->payment_amount }}</td>
                 <td>Rs. {{ $payment->paid_amount }}</td>
                 <td>{{ $payment->payment_mode }}</td>
                 <td>{!! Form::open(array('route' => ['payment.destroy', $payment->payment_id], 'method'=>'Delete')) !!}

@@ -90,7 +90,15 @@ class ClientController extends Controller
                 ->where('documents.is_active', '=', 1)
                ->where('documents.client_id', '=', $client->client_id)
                 ->get();
-       return view('client.view', compact('client', 'user', 'directors', 'fees', 'documents')); 
+       $payments = DB::table('payment')
+                ->join('fees', 'fees.fee_id', '=', 'payment.fee_id')
+                ->join('client', 'client.client_id', '=', 'fees.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'fees.fees as fees', 'fees.balance as balance', 'payment.service_name','fees.fee_id',
+                        'payment.payment_amount', 'payment.payment_id', 'payment.paid_amount',
+                        'payment.payment_mode', 'payment.check_no', 'payment.paymentdate', 'payment.remarks')
+                ->where('client.client_id', $client->client_id)->get();
+       return view('client.view', compact('client', 'user', 'directors', 'fees', 'documents', 'payments')); 
     }
 
     /**
