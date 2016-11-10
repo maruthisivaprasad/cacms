@@ -50,10 +50,11 @@
                 @else
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/client') }}">Clients</a></li>
-                    <li><a href="{{ url('/director') }}">Directors</a></li>
-                    <li><a href="{{ url('/fee') }}">Fees</a></li>
+                    <li><a href="{{ url('/director') }}">Contacts</a></li>
+                    <li><a href="{{ url('/fee') }}">Invoice</a></li>
                     <li><a href="{{ url('/document') }}">Documents</a></li>
                     <li><a href="{{ url('/payment') }}">Payments</a></li>
+                    <li><a href="{{ url('/task') }}">Tasks</a></li>
                 </ul>
                 @endif
                 <!-- Right Side Of Navbar -->
