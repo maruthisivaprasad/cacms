@@ -104,4 +104,40 @@ class TaskController extends Controller
         $task->delete();
         return redirect()->route('task.index')->with('message', 'Task Deleted successful');
     }
+    
+    public function excel() {
+
+        $tasks = Tasks::join('client', 'client.client_id', '=', 'tasks.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'tasks.subject', 'tasks.description', 'tasks.priority', 'tasks.duedate', 'tasks.remarks',
+                        'tasks.task_id')
+                ->get();
+        // Initialize the array which will be passed into the Excel
+        // generator.
+        $paymentsArray = []; 
+
+        // Define the Excel spreadsheet headers
+        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+
+        // Convert each member of the returned collection into an array,
+        // and append it to the payments array.
+        foreach ($tasks as $payment) {
+            $paymentsArray[] = $payment->toArray();
+        }
+
+        // Generate and return the spreadsheet
+        Excel::create('tasks', function($excel) use ($paymentsArray) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Tasks');
+            $excel->setCreator('Laravel')->setCompany('WJ Gilmore, LLC');
+            $excel->setDescription('payments file');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
+                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+            });
+
+        })->download('xlsx');
+    }
 }

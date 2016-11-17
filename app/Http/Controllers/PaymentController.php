@@ -146,4 +146,42 @@ class PaymentController extends Controller
         $payment->delete();
         return redirect()->route('payment.index')->with('message', 'payment Deleted successful');
     }
+    
+    public function excel() {
+
+        $payments = Payment::join('fees', 'fees.fee_id', '=', 'payment.fee_id')
+                ->join('client', 'client.client_id', '=', 'fees.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'fees.fees as fees', 'fees.balance as balance', 'payment.service_name','fees.fee_id',
+                        'payment.payment_amount', 'payment.payment_id', 'payment.paid_amount',
+                        'payment.payment_mode', 'payment.check_no', 'payment.paymentdate', 'payment.remarks')
+                ->get();
+        // Initialize the array which will be passed into the Excel
+        // generator.
+        $paymentsArray = []; 
+
+        // Define the Excel spreadsheet headers
+        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+
+        // Convert each member of the returned collection into an array,
+        // and append it to the payments array.
+        foreach ($payments as $payment) {
+            $paymentsArray[] = $payment->toArray();
+        }
+
+        // Generate and return the spreadsheet
+        Excel::create('payments', function($excel) use ($paymentsArray) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Payments');
+            $excel->setCreator('Laravel')->setCompany('WJ Gilmore, LLC');
+            $excel->setDescription('payments file');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
+                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+            });
+
+        })->download('xlsx');
+    }
 }

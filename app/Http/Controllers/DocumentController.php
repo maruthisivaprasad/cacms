@@ -77,4 +77,40 @@ class DocumentController extends Controller
         $document->delete();
         return redirect()->route('document.index')->with('message', 'Document Deleted successful');
     }
+    
+    public function excel() {
+
+        $documents = Documents::join('client', 'client.client_id', '=', 'documents.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype','client.business_name as bname', 'documents.title as title', 'documents.path as path', 
+                        'documents.document_id', 'client.client_id')
+                ->where('documents.is_active', '=', 1)
+                ->get();
+        // Initialize the array which will be passed into the Excel
+        // generator.
+        $paymentsArray = []; 
+
+        // Define the Excel spreadsheet headers
+        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+
+        // Convert each member of the returned collection into an array,
+        // and append it to the payments array.
+        foreach ($documents as $payment) {
+            $paymentsArray[] = $payment->toArray();
+        }
+
+        // Generate and return the spreadsheet
+        Excel::create('documents', function($excel) use ($paymentsArray) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Documents');
+            $excel->setCreator('Laravel')->setCompany('WJ Gilmore, LLC');
+            $excel->setDescription('payments file');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
+                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+            });
+
+        })->download('xlsx');
+    }
 }

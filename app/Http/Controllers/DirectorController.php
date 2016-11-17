@@ -7,6 +7,7 @@ use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DirectorRequest;
+use Excel;
 
 class DirectorController extends Controller
 {
@@ -105,5 +106,41 @@ class DirectorController extends Controller
     {
         $director->delete();
         return redirect()->route('director.index')->with('message', 'Director Deleted successful');
+    }
+    
+    public function excel() {
+
+        $directors = Director::join('client', 'client.client_id', '=', 'director.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'director.name as dname', 'director.phone as dphone', 'director.email as demail',
+                        'director.din', 'director.director_id')
+                ->get();
+        // Initialize the array which will be passed into the Excel
+        // generator.
+        $paymentsArray = []; 
+
+        // Define the Excel spreadsheet headers
+        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+
+        // Convert each member of the returned collection into an array,
+        // and append it to the payments array.
+        foreach ($directors as $payment) {
+            $paymentsArray[] = $payment->toArray();
+        }
+
+        // Generate and return the spreadsheet
+        Excel::create('directors', function($excel) use ($paymentsArray) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Directors');
+            $excel->setCreator('Laravel')->setCompany('WJ Gilmore, LLC');
+            $excel->setDescription('payments file');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
+                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+            });
+
+        })->download('xlsx');
     }
 }

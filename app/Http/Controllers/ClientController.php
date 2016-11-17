@@ -159,4 +159,36 @@ class ClientController extends Controller
         $client->delete();
         return redirect()->route('client.index')->with('message', 'Client Deleted successful');
     }
+    
+    public function excel() {
+
+        $clients = Client::all();
+        // Initialize the array which will be passed into the Excel
+        // generator.
+        $paymentsArray = []; 
+
+        // Define the Excel spreadsheet headers
+        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+
+        // Convert each member of the returned collection into an array,
+        // and append it to the payments array.
+        foreach ($clients as $payment) {
+            $paymentsArray[] = $payment->toArray();
+        }
+
+        // Generate and return the spreadsheet
+        Excel::create('clients', function($excel) use ($paymentsArray) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Clients');
+            $excel->setCreator('Laravel')->setCompany('WJ Gilmore, LLC');
+            $excel->setDescription('payments file');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
+                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+            });
+
+        })->download('xlsx');
+    }
 }

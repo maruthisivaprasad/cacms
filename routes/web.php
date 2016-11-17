@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('director/excel', 'DirectorController@excel');
+Route::get('fee/excel', 'FeeController@excel');
+Route::get('document/excel', 'DocumentController@excel');
+Route::get('payment/excel', 'PaymentController@excel');
+Route::get('task/excel', 'TaskController@excel');
+Route::get('client/excel', 'ClientController@excel');
 /*Route::get('contact', 'ContactController@index');
 Route::get('contact/create', 'ContactController@create');
 Route::post('contact/store', 'ContactController@store');

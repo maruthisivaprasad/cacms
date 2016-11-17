@@ -42,6 +42,7 @@
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
         {{ link_to_route('director.create', 'Add Contact', null, ['class'=>'btn btn-primary']) }}
+        {{ link_to_route('director.excel', 'Export to Excel', null, ['class' => 'btn btn-primary']) }}
     </div>
 </div>
 @endsection
