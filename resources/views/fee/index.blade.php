@@ -6,7 +6,7 @@
             @if(Session::has('message'))
             <div class='alert alert-success'>{{ Session::get('message')}}</div>
             @endif
-            @section ('table_panel_title','Fee')
+            @section ('table_panel_title','Invoice')
             @section ('table_panel_body')
                 <table class="table">
                     <tr>
@@ -39,7 +39,7 @@
                 </table>
             @endsection
             @include('widgets.panel', array('header'=>true, 'as'=>'table'))
-            {{ link_to_route('fee.create', 'Add Fee', null, ['class'=>'btn btn-primary']) }}
+            {{ link_to_route('fee.create', 'Add Invoice', null, ['class'=>'btn btn-primary']) }}
     </div>
 </div>
 @endsection

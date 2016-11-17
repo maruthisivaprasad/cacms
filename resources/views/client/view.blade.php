@@ -110,7 +110,7 @@
     </div>
     @if($client->client_type=='Business')
     <div class="row">    
-        @section ('dtable_panel_title','Director')
+        @section ('dtable_panel_title','Contacts')
         @section ('dtable_panel_body')
         <table class="table table-condensed">
             <tr>
@@ -143,13 +143,13 @@
             </tr>
             @endforeach
         </table>
-        {{ link_to_route('director.create', 'Add Director', null, ['class'=>'btn btn-primary']) }}
+        {{ link_to_route('director.create', 'Add Contact', null, ['class'=>'btn btn-primary']) }}
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'dtable'))
     </div> 
     @endif
     <div class="row">
-        @section ('ftable_panel_title','Fees')
+        @section ('ftable_panel_title','Invoices')
         @section ('ftable_panel_body')
         <table class="table table-condensed">
             <tr>
@@ -180,7 +180,7 @@
             </tr>
             @endforeach
         </table>
-        {{ link_to_route('fee.create', 'Add Fee', null, ['class'=>'btn btn-primary']) }}
+        {{ link_to_route('fee.create', 'Add Invoices', null, ['class'=>'btn btn-primary']) }}
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'ftable'))
     </div>
@@ -255,6 +255,41 @@
         {{ link_to_route('payment.create', 'Add Payment', null, ['class'=>'btn btn-primary']) }}
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
+    </div>
+    
+    <div class="row">
+        @section ('trtable_panel_title','Task')
+        @section ('trtable_panel_body')
+            <table class="table">
+                <tr>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Remarks</th>
+                    <th></th>
+                </tr>
+            @foreach($tasks as $task)
+            <tr>
+                <td>{{ $task->subject }}</td>
+                <td>{{ $task->description }}</td>
+                <td>{{ $task->priority }}</td>
+                <td>{{ $task->duedate }}</td>
+                <td>{{ $task->remarks }}</td>
+                <td>{!! Form::open(array('route' => ['task.destroy', $task->task_id], 'method'=>'Delete')) !!}
+                        {{ link_to_route('task.show', 'View', [$task->task_id], ['class'=>'btn btn-primary']) }} 
+                        |
+                        {{ link_to_route('task.edit', 'Edit', [$task->task_id], ['class'=>'btn btn-primary']) }} 
+                        | 
+                        {!! Form::button('Delete',['type'=>'submit', 'class'=>'btn btn-danger']) !!}
+                    {!! Form::close() !!}    
+                </td>
+            </tr>
+            @endforeach
+            </table>
+        @endsection
+        @include('widgets.panel', array('header'=>true, 'as'=>'trtable'))
+        {{ link_to_route('task.create', 'Add Task', null, ['class'=>'btn btn-primary']) }}
     </div>
 </div>
 @endsection

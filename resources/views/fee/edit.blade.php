@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Update Fee</div>
+            <div class="panel-heading">Update Invoice</div>
             <div class="panel-body">
                 {!! Form::model($fee, array('route' => ['fee.update', $fee->fee_id], 'method'=>'PUT')) !!}
                 <div class="form-group">

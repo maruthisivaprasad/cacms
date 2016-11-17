@@ -8,6 +8,10 @@
             <table class="table table-condensed">
                 <tbody>
                     <tr>
+                        <td>Client Name</td>
+                        <td><?php if($client->client_type=='Business') { echo $client->business_name; } else { echo $client->name; }  ?></td>
+                    </tr>
+                    <tr>
                         <td>Subject</td>
                         <td><?php echo $task->subject; ?></td>
                     </tr>

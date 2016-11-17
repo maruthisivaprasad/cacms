@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Create Director</div>
+            <div class="panel-heading">Create Contact</div>
             <div class="panel-body">
                 {!! Form::open(array('route' => 'director.store')) !!}
-                <div class="form-group">
+                <div class="row">
                     <div class="col-xs-2">
                         {!! Form::label('client_id', 'Client') !!}
                     </div>
@@ -29,7 +29,7 @@
                         {!! Form::text('name',null,['class'=>'form-control']) !!}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="row">
                     <div class="col-xs-2">
                         {!! Form::label('din', 'DIN') !!}
                     </div>
@@ -43,7 +43,7 @@
                         {!! Form::text('phone',null,['class'=>'form-control']) !!}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="row">
                     <div class="col-xs-2">
                         {!! Form::label('email', 'Email') !!}
                     </div>
@@ -57,7 +57,22 @@
                         {!! Form::select('digital_sig',array('yes' => 'Yes', 'no' => 'No'), null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
-                <div id="digitasignal" class="form-group" style="display:none">
+                <div class="row">
+                    <div class="col-xs-2">
+                        {!! Form::label('designation', 'Designation') !!}
+                    </div>
+                    <div class="col-xs-4">
+                        {!! Form::text('designation',null,['class'=>'form-control']) !!}
+                    </div>
+                    <div class="col-xs-2">
+                        {!! Form::label('pcontact', 'Is Primary Contact?') !!}
+                    </div>
+                    <div class="col-xs-4">
+                        {!! Form::radio('pcontact', '1') !!}Yes
+                        {!! Form::radio('pcontact', '0') !!}No
+                    </div>
+                </div>
+                <div id="digitasignal" class="row" style="display:none">
                     <div class="col-md-2">
                         {!! Form::label('expiry_date', 'Expiry Date') !!}
                     </div>
@@ -65,7 +80,7 @@
                         {!! Form::text('expiry_date',null,['class'=>'form-control datepicker']) !!}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="row">
                     <div class="col-md-12">
                      {!! Form::button('Create',['type'=>'submit', 'class'=>'btn btn-primary']) !!}  
                     </div>

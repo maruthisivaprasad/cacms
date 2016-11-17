@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Create Fee</div>
+            <div class="panel-heading">Create Invoice</div>
             <div class="panel-body">
                 {!! Form::open(array('route' => 'fee.store')) !!}
                 <div class="form-group">

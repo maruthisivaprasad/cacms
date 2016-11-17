@@ -20,7 +20,12 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = DB::table('tasks')
+                ->join('client', 'client.client_id', '=', 'tasks.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'tasks.subject', 'tasks.description', 'tasks.priority', 'tasks.duedate', 'tasks.remarks',
+                        'tasks.task_id')
+                ->get();
         return view('task.index', compact('tasks'));
     }
 
@@ -31,7 +36,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task.create');
+        $clients = DB::table('client')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'client.client_id')
+                ->get();
+        return view('task.create', compact('clients'));
     }
 
     /**
@@ -54,7 +62,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('task.view', compact('task')); 
+        $client = DB::table('client')->where('client_id', $task->client_id)->first();
+        return view('task.view', compact('task', 'client')); 
     }
 
     /**
@@ -65,7 +74,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('task.edit', compact('task'));
+        $clients = DB::table('client')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 'client.client_id')
+                ->get();
+        return view('task.edit', compact('task', 'clients'));
     }
 
     /**

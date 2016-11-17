@@ -24,6 +24,7 @@ class TaskRequest extends FormRequest
     public function rules()
     {
         return [
+            'client_id' => 'required',
             'subject' => 'required',
             'priority' => 'required',
             'duedate' => 'required',

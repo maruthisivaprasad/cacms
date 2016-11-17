@@ -6,7 +6,7 @@
         @if(Session::has('message'))
         <div class='alert alert-success'>{{ Session::get('message')}}</div>
         @endif
-        @section ('table_panel_title','Director')
+        @section ('table_panel_title','Contact')
         @section ('table_panel_body')
             <table class="table">
                 <tr>
@@ -41,7 +41,7 @@
             </table>
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
-        {{ link_to_route('director.create', 'Add Director', null, ['class'=>'btn btn-primary']) }}
+        {{ link_to_route('director.create', 'Add Contact', null, ['class'=>'btn btn-primary']) }}
     </div>
 </div>
 @endsection

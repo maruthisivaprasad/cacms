@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/cacms/resources/views/layouts/app.blade.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/resources/views/task/index.blade.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/app/Task.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/app/Http/Requests/TaskRequest.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/resources/views/task/edit.blade.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/routes/web.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/app/Http/Controllers/TaskController.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/resources/views/task/view.blade.php</file>
+            <file>file:/C:/xampp/htdocs/cacms/resources/views/task/create.blade.php</file>
+        </group>
     </open-files>
 </project-private>

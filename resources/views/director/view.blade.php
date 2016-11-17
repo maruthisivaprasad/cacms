@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        @section ('ctable_panel_title','Director Information')
+        @section ('ctable_panel_title','Contact Information')
         @section ('ctable_panel_body')    
             <table class="table table-condensed">
                 <tbody>

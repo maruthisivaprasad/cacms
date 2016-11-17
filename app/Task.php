@@ -9,6 +9,6 @@ class Task extends Model
     protected $table = 'tasks';
     protected $primaryKey = 'task_id';
     protected $fillable = [
-        'subject', 'description', 'priority', 'duedate', 'remarks', 'assigned_to'
+        'client_id', 'subject', 'description', 'priority', 'duedate', 'remarks', 'assigned_to'
     ];
 }

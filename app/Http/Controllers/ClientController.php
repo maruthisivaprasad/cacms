@@ -98,7 +98,13 @@ class ClientController extends Controller
                         'payment.payment_amount', 'payment.payment_id', 'payment.paid_amount',
                         'payment.payment_mode', 'payment.check_no', 'payment.paymentdate', 'payment.remarks')
                 ->where('client.client_id', $client->client_id)->get();
-       return view('client.view', compact('client', 'user', 'directors', 'fees', 'documents', 'payments')); 
+       $tasks = DB::table('tasks')
+                ->join('client', 'client.client_id', '=', 'tasks.client_id')
+                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                        'tasks.subject', 'tasks.description', 'tasks.priority', 'tasks.duedate', 'tasks.remarks',
+                        'tasks.task_id')
+                ->where('client.client_id', $client->client_id)->get();
+       return view('client.view', compact('client', 'user', 'directors', 'fees', 'documents', 'payments', 'tasks')); 
     }
 
     /**

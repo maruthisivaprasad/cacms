@@ -9,6 +9,6 @@ class Director extends Model
     protected $table = 'director';
     protected $primaryKey = 'director_id';
     protected $fillable = [
-        'client_id', 'name', 'din', 'phone', 'email', 'digital_sig', 'expiry_date'
+        'client_id', 'name', 'din', 'phone', 'email', 'digital_sig', 'expiry_date', 'designation', 'pcontact'
     ];
 }

@@ -10,6 +10,7 @@
         @section ('table_panel_body')
             <table class="table">
                 <tr>
+                    <th>Client Name</th>
                     <th>Subject</th>
                     <th>Description</th>
                     <th>Priority</th>
@@ -19,6 +20,11 @@
                 </tr>
             @foreach($tasks as $task)
             <tr>
+                @if($task->ctype=='Business')
+                <td>{{ $task->bname }}</td>
+                @else
+                <td>{{ $task->cname }}</td>
+                @endif
                 <td>{{ $task->subject }}</td>
                 <td>{{ $task->description }}</td>
                 <td>{{ $task->priority }}</td>
