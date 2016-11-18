@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ClientRequest;
+use Excel;
 
 class ClientController extends Controller
 {
@@ -162,13 +163,16 @@ class ClientController extends Controller
     
     public function excel() {
 
-        $clients = Client::all();
+        $clients = Client::select('name', 'client_type', 'business_name', 'address', 'mobile', 'email', 'pan', 'uidai',
+                'office_address', 'office_landline', 'website', 'business_nature', 'company_type', 'client_status')
+                ->get();
         // Initialize the array which will be passed into the Excel
         // generator.
         $paymentsArray = []; 
 
         // Define the Excel spreadsheet headers
-        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+        $paymentsArray[] = ['Name', 'Client Type', 'Business Name' ,'Address','Mobile','Email', 'PAN', 'UIDAI', 
+            'Office Address', 'Office Landline', 'Website', 'Business Nature', 'Company Type', 'Client Status'];
 
         // Convert each member of the returned collection into an array,
         // and append it to the payments array.

@@ -39,6 +39,7 @@
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
         {{ link_to_route('client.create', 'Add Client', null, ['class'=>'btn btn-primary']) }}
+        {{ link_to_route('client.excel', 'Export to Excel', null, ['class' => 'btn btn-primary']) }}
     </div>
 </div>
 @endsection

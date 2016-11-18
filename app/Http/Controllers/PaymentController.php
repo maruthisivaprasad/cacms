@@ -7,6 +7,7 @@ use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PaymentRequest;
+use Excel;
 
 class PaymentController extends Controller
 {
@@ -151,9 +152,9 @@ class PaymentController extends Controller
 
         $payments = Payment::join('fees', 'fees.fee_id', '=', 'payment.fee_id')
                 ->join('client', 'client.client_id', '=', 'fees.client_id')
-                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
-                        'fees.fees as fees', 'fees.balance as balance', 'payment.service_name','fees.fee_id',
-                        'payment.payment_amount', 'payment.payment_id', 'payment.paid_amount',
+                ->select('client.name as cname', 'client.business_name as bname', 
+                        'fees.fees as fees', 'fees.balance as balance', 'payment.service_name',
+                        'payment.payment_amount', 'payment.paid_amount',
                         'payment.payment_mode', 'payment.check_no', 'payment.paymentdate', 'payment.remarks')
                 ->get();
         // Initialize the array which will be passed into the Excel
@@ -161,7 +162,7 @@ class PaymentController extends Controller
         $paymentsArray = []; 
 
         // Define the Excel spreadsheet headers
-        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+        $paymentsArray[] = ['Client Name', 'Business Name','Fees','Balance','Service Name', 'Payment Amount', 'Paid Amount', 'Payment Mode', 'Check Number', 'Payment Date', 'Remarks'];
 
         // Convert each member of the returned collection into an array,
         // and append it to the payments array.

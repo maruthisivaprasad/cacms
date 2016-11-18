@@ -47,6 +47,7 @@
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
         {{ link_to_route('payment.create', 'Add Payment', null, ['class'=>'btn btn-primary']) }}
+        {{ link_to_route('payment.excel', 'Export to Excel', null, ['class' => 'btn btn-primary']) }}
     </div>
 </div>
 @endsection

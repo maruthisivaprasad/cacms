@@ -19,6 +19,30 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::patch('/director/excel',[
+    'as' => 'director.excel',
+    'uses' => 'DirectorController@excel'
+]);
+Route::patch('/fee/excel',[
+    'as' => 'fee.excel',
+    'uses' => 'FeeController@excel'
+]);
+Route::patch('/document/excel',[
+    'as' => 'document.excel',
+    'uses' => 'DocumentController@excel'
+]);
+Route::patch('/payment/excel',[
+    'as' => 'payment.excel',
+    'uses' => 'PaymentController@excel'
+]);
+Route::patch('/task/excel',[
+    'as' => 'task.excel',
+    'uses' => 'TaskController@excel'
+]);
+Route::patch('/client/excel',[
+    'as' => 'client.excel',
+    'uses' => 'ClientController@excel'
+]);
 Route::get('director/excel', 'DirectorController@excel');
 Route::get('fee/excel', 'FeeController@excel');
 Route::get('document/excel', 'DocumentController@excel');

@@ -7,6 +7,7 @@ use App\Fee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\FeeRequest;
+use Excel;
 
 class FeeController extends Controller
 {
@@ -117,17 +118,16 @@ class FeeController extends Controller
     
     public function excel() {
 
-        $fees = Fees::join('client', 'client.client_id', '=', 'fees.client_id')
-                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
-                        'fees.service_name', 'fees.fees', 'fees.amount_receive', 'fees.balance', 'fees.type',
-                        'fees.fee_id')
+        $fees = Fee::join('client', 'client.client_id', '=', 'fees.client_id')
+                ->select('client.name as cname', 'client.business_name as bname', 'fees.service_name', 'fees.type', 
+                        'fees.fees', 'fees.amount_receive', 'fees.balance', 'fees.service_deliver')
                 ->get();
         // Initialize the array which will be passed into the Excel
         // generator.
         $paymentsArray = []; 
 
         // Define the Excel spreadsheet headers
-        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+        $paymentsArray[] = ['Client Name', 'Business Name','Service Name','Type','Fees', 'Amount Receive', 'Balance', 'Service Deliver'];
 
         // Convert each member of the returned collection into an array,
         // and append it to the payments array.
@@ -136,7 +136,7 @@ class FeeController extends Controller
         }
 
         // Generate and return the spreadsheet
-        Excel::create('fees', function($excel) use ($paymentsArray) {
+        Excel::create('invoice', function($excel) use ($paymentsArray) {
 
             // Set the spreadsheet title, creator, and description
             $excel->setTitle('Fees');

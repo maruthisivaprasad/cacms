@@ -6,6 +6,7 @@ use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TaskRequest;
+use Excel;
 
 class TaskController extends Controller
 {
@@ -107,17 +108,16 @@ class TaskController extends Controller
     
     public function excel() {
 
-        $tasks = Tasks::join('client', 'client.client_id', '=', 'tasks.client_id')
-                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
-                        'tasks.subject', 'tasks.description', 'tasks.priority', 'tasks.duedate', 'tasks.remarks',
-                        'tasks.task_id')
+        $tasks = Task::join('client', 'client.client_id', '=', 'tasks.client_id')
+                ->select('client.name as cname', 'client.business_name as bname', 
+                        'tasks.subject', 'tasks.description', 'tasks.priority', 'tasks.duedate', 'tasks.remarks')
                 ->get();
         // Initialize the array which will be passed into the Excel
         // generator.
         $paymentsArray = []; 
 
         // Define the Excel spreadsheet headers
-        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+        $paymentsArray[] = ['Client Name', 'Busness Name','Subject','Description','Priority', 'Due Date', 'Remarks'];
 
         // Convert each member of the returned collection into an array,
         // and append it to the payments array.

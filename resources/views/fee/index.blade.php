@@ -40,6 +40,7 @@
             @endsection
             @include('widgets.panel', array('header'=>true, 'as'=>'table'))
             {{ link_to_route('fee.create', 'Add Invoice', null, ['class'=>'btn btn-primary']) }}
+            {{ link_to_route('fee.excel', 'Export to Excel', null, ['class' => 'btn btn-primary']) }}
     </div>
 </div>
 @endsection

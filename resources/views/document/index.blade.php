@@ -85,6 +85,7 @@
             </table>
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'table'))
+        {{ link_to_route('document.excel', 'Export to Excel', null, ['class' => 'btn btn-primary']) }}
     </div>
 </div>
 @endsection

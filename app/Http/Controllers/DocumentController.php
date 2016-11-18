@@ -8,6 +8,7 @@ use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DocumentRequest;
+use Excel;
 
 class DocumentController extends Controller
 {
@@ -80,9 +81,9 @@ class DocumentController extends Controller
     
     public function excel() {
 
-        $documents = Documents::join('client', 'client.client_id', '=', 'documents.client_id')
-                ->select('client.name as cname', 'client.client_type as ctype','client.business_name as bname', 'documents.title as title', 'documents.path as path', 
-                        'documents.document_id', 'client.client_id')
+        $documents = Document::join('client', 'client.client_id', '=', 'documents.client_id')
+                ->select('client.name as cname', 'client.business_name as bname', 'documents.title as title', 
+                        'documents.path as path')
                 ->where('documents.is_active', '=', 1)
                 ->get();
         // Initialize the array which will be passed into the Excel
@@ -90,7 +91,7 @@ class DocumentController extends Controller
         $paymentsArray = []; 
 
         // Define the Excel spreadsheet headers
-        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+        $paymentsArray[] = ['Client Name', 'Business Name','Title','Path'];
 
         // Convert each member of the returned collection into an array,
         // and append it to the payments array.

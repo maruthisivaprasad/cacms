@@ -111,16 +111,16 @@ class DirectorController extends Controller
     public function excel() {
 
         $directors = Director::join('client', 'client.client_id', '=', 'director.client_id')
-                ->select('client.name as cname', 'client.client_type as ctype', 'client.business_name as bname', 
+                ->select('client.name as cname', 'client.business_name as bname', 
                         'director.name as dname', 'director.phone as dphone', 'director.email as demail',
-                        'director.din', 'director.director_id')
+                        'director.din', 'director.expiry_date', 'director.designation')
                 ->get();
         // Initialize the array which will be passed into the Excel
         // generator.
         $paymentsArray = []; 
 
         // Define the Excel spreadsheet headers
-        $paymentsArray[] = ['dname', 'dphone','demail','din','ctype'];
+        $paymentsArray[] = ['Client Name', 'Client Business Name','Name','Phone','Email','DIN', 'Expiry Date', 'Designation'];
 
         // Convert each member of the returned collection into an array,
         // and append it to the payments array.
@@ -129,7 +129,7 @@ class DirectorController extends Controller
         }
 
         // Generate and return the spreadsheet
-        Excel::create('directors', function($excel) use ($paymentsArray) {
+        Excel::create('contacts', function($excel) use ($paymentsArray) {
 
             // Set the spreadsheet title, creator, and description
             $excel->setTitle('Directors');
